@@ -274,7 +274,7 @@ MovementLine.prototype.draw = function(ctx) {
 		tail_x -= 6;
 		this.dest_x += 6;
 	}
-	
+	ctx.beginPath();
 	ctx.moveTo(tail_x, this.tail.y + padding_below_text);
 	ctx.quadraticCurveTo(tail_x, this.bottom_y, (tail_x + this.dest_x) / 2, this.bottom_y);
 	ctx.quadraticCurveTo(this.dest_x, this.bottom_y, this.dest_x, this.dest_y + padding_below_text);
@@ -311,12 +311,12 @@ function go(str, font_size, term_font, nonterm_font, vert_space, hor_space, colo
 	root.check_triangle();
 	
 	var canvas;
-	var ctx;
+	var ctx = new C2S();
 	
 	try {
 		// Make a new canvas. Required for IE compatability.
 		canvas = document.createElement("canvas");
-		ctx = canvas.getContext('2d');
+		// ctx = canvas.getContext('2d');
 	} catch (err) {
 		throw "canvas";
 	}
@@ -325,6 +325,7 @@ function go(str, font_size, term_font, nonterm_font, vert_space, hor_space, colo
 	root.set_width(ctx, vert_space, hor_space, term_font, nonterm_font);
 	root.assign_location(0, 0, font_size, term_lines);
 	root.find_height();
+	var output = $("#out");
 	
 	var movement_lines = new Array();
 	root.find_movement(movement_lines, root);
@@ -345,6 +346,8 @@ function go(str, font_size, term_font, nonterm_font, vert_space, hor_space, colo
 	canvas.id = "canvas";
 	canvas.width = width;
 	canvas.height = height;
+	ctx.width = width;
+	ctx.height = height;
 	ctx.fillStyle = "rgb(255, 255, 255)";
 	ctx.fillRect(0, 0, width, height);
 	ctx.fillStyle = "rgb(0, 0, 0)";
@@ -353,12 +356,22 @@ function go(str, font_size, term_font, nonterm_font, vert_space, hor_space, colo
 	var y_shift = Math.floor(font_size + margin);
 	ctx.translate(x_shift, y_shift);
 	
-	root.draw(ctx, font_size, term_font, nonterm_font, color, term_lines);
+ 	root.draw(ctx, font_size, term_font, nonterm_font, color, term_lines);
 	for (var i = 0; i < movement_lines.length; i++)
 		if (movement_lines[i].should_draw) movement_lines[i].draw(ctx);
-	
-	// Swap out the image
-	return Canvas2Image.saveAsPNG(canvas, true);
+
+
+	var svg = ctx.getSvg();
+
+	svg.setAttribute("width", width);
+	svg.setAttribute("height", height);
+	output.empty();
+	output.append(svg);
+
+	// return Canvas2Image.saveAsPNG(canvas, true);
+	// console.log(ctx.getSvg())
+	// var out = ctx.getSerializedSvg();
+	// return ctx.getSvg();
 }
 
 function subscriptify(in_str) {
