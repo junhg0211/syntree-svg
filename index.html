@@ -10,12 +10,11 @@
 
 <body>
 	<div id="accordion">
-		<h3><a href="#">Syntax Tree Generator</a></h3><div style="text-align:left">
-			<textarea id="i" rows="4">[S [NP This] [VP [V is] [^NP a wug]]]</textarea>
-			(C) 2011 by <a href="http://mshang.ca/">Miles Shang</a>, see <a href="LICENSE.txt">license</a>.<br>Edited by abitcreative.
+		<h3><a href="#">SVG Syntax Tree Generator</a></h3><div style="text-align:left">
+			<textarea id="i" rows="4">[IP [DP [D&deg; This]] [I' [I&deg; will] [VP [V&deg; generate] [DP^ trees]]]]</textarea>
 		</div>
 		
-		<h3><a href="#">Options</a></h3><div>
+		<h3><a href="#">Options</a></h3><div>	
 			<table>
 				<col width="1*">
 				<col width="1*">
@@ -33,7 +32,7 @@
 				<tr>
 					<td align="center"><div id="term-font-check" class="nobr">
 						<input type="checkbox" id="term-bold" class="redraw" /><label for="term-bold">Bold</label>
-						<input type="checkbox" id="term-ital" class="redraw" /><label for="term-ital">Italic</label>
+						<input type="checkbox" id="term-ital" class="redraw" checked /><label for="term-ital">Italic</label>
 					</span></td>
 					<td align="center"><div id="nonterm-font-check" class="nobr">
 						<input type="checkbox" id="nonterm-bold" class="redraw" /><label for="nonterm-bold">Bold</label>
@@ -54,8 +53,8 @@
 				</tr>
 				<tr>
 					<td align="center" colspan="2"><div class="nobr">
-						<input type="checkbox" id="color-check" class="redraw" checked /><label for="color-check">Color</label>
-						<input type="checkbox" id="term-lines" class="redraw" checked /><label for="term-lines">Terminal lines</label>
+						<input type="checkbox" id="color-check" class="redraw" checked /><label for="color-check">Colour</label>
+						<input type="checkbox" id="term-lines" class="redraw" /><label for="term-lines">Terminal lines</label>
 						<a href="#" id="make-link">Link</a>
 					</div></td>
 				</tr>
@@ -63,13 +62,26 @@
 		</div>
 	
 		<h3><a href="#">Help</a></h3><div class="help">
-			<p>Use labelled bracket notation. This app will build the tree as you type and will attempt to close any brackets that you may be missing. Save the image to your computer by clicking on the button "Download SVG-File". For more information, including on how to draw movement lines, visit the <a href="https://github.com/mshang/syntree/wiki">wiki</a>.</p>
-			<h3>Examples</h3>
-			<a class="example" href="?i=[NP^ Alice]">[NP^ Alice]</a><br />
-			<a class="example" href="?i=[NP [N Alice] and [N Bob]]">[NP [N Alice] and [N Bob]]</a><br />
-			<a class="example" href="?i=[S[NP[N Alice]][VP[V is][NP[N'[N a student][PP^ of physics">[S[NP[N Alice]][VP[V is][NP[N'[N a student][PP^ of physics</a><br />
-			<a class="example" href="?i=[S [X_a Movement] [Y example &lt;a&gt;]]">[S [X_a Movement] [Y example &lt;a&gt;]]</a>
-		</div>
+			<p>Use labelled bracket notation. This app will build the tree as you type and will attempt to close any brackets that you may be missing. Save the image to your computer by clicking on the button "Download tree as an SVG-file". For more information, including on how to draw movement lines, visit the <a href="https://github.com/mshang/syntree/wiki">wiki</a>.</p>
+			<h3>Examples (try one or two of them)</h3>
+			(1) <a class="example" href="?i=[[un-] [[lock] [-able]]">[[un-] [[lock] [-able]]</a> (= <i>cannot be locked</i>)<br />
+			<br />
+			(2) <a class="example" href="?i=[adj [prefix un-] [adj [verb lock] [suffix -able]]">[adj [prefix un-] [adj [verb lock] [suffix -able]]</a> (= <i>cannot be locked</i>)<br />
+			<br />
+			(3) <a class="example" href="?i=[[[un-] [lock]] [-able]]">[[[un-] [lock]] [-able]]</a> (= <i>can be unlocked</i>)<br />
+			<br />
+			(4) <a class="example" href="?i=[adj [verb [prefix un-] [verb lock]] [suffix -able]]">[adj [verb [prefix un-] [verb lock]] [suffix -able]]</a> (= <i>can be unlocked</i>)</a><br />
+			<br />
+			(5) <a class="example" href="?i=[VP [VP [V° call] [DP^ her mother]] [DP^ next week]]">[VP [VP [V&deg; call] [DP^ her mother]] [DP^ next week]]</a><br />
+			<br />
+			(6) <a class="example" href="?i=[NP [NP [N° teacher] [PP^ of linguistics]] [PP^ with an American accent]]">[NP [NP [N&deg; teacher] [PP^ of linguistics]] [PP^ with an American accent]]</a><br />
+			<br />
+			(7) <a class="example" href="?i=[IP [DP [D° This]] [I' [I° will] [VP [V° generate] [DP^ trees]]]]">[IP [DP [D&deg; This]] [I' [I&deg; will] [VP [V&deg; generate] [DP^ trees]]]]</a><br />
+			<br />
+			(8) <a class="example" href="?i=[IP [DP [D° The] [NP [NP [N° book]] [CP [DP_1 which] [C' [C° []] [IP [DP [D° we]] [I' [I° []] [VP [V° bought] [DP [t_1]]]]]]]]] [I' [I° [was_2]] [VP [V° [t_2]] [AdjP [Adj° awful]]]]]">[IP [DP [D&deg; The] [NP [NP [N&deg; book]] [CP [DP_1 which] [C' [C&deg; []] [IP [DP [D&deg; we]] [I' [I&deg; []] [VP [V&deg; bought] [DP [t_1]]]]]]]]] [I' [I&deg; [was_2]] [VP [V&deg; [t_2]] [AdjP [Adj&deg; awful]]]]]</a> (with indices)<br />
+			<br />
+			(9) <a class="example" href="?i=[IP [DP [D° The] [NP [NP [N° book]] [CP [DP_x which] [C' [C° []] [IP [DP [D° we]] [I' [I° []] [VP [V° bought] [DP t<x>]]]]]]]] [I' [I°_y was] [VP [V° t<y>] [AdjP [Adj° awful]]]]]">[IP [DP [D&deg; The] [NP [NP [N&deg; book]] [CP [DP_x which] [C' [C&deg; []] [IP [DP [D&deg; we]] [I' [I&deg; []] [VP [V&deg; bought] [DP t<x>]]]]]]]] [I' [I&deg;_y was] [VP [V&deg; t<y>] [AdjP [Adj&deg; awful]]]]]</a> (with arrows)<br />
+					</div>
 	</div>
 	<br />
 
@@ -77,7 +89,19 @@
 	<div id="out" style="text-align: center; margin-bottom: 1em;"></div>
 
 	<div style="text-align: center;">
-		<button id="download">Download SVG-File</button>
+	<button id="download">Download this tree as an SVG-file</button>
+	</div>
+
+	<div style="text-align: center;">
+	<br>
+	SVG-files can be inserted as pictures in e.g. Microsoft Word or LibreOffice Writer.<br>
+	SVG-files can be also be displayed by browsers like Chrome, Firefox, Opera, Safari, or Microsoft Edge.<br>
+	<br>
+	To run <i>SVG Syntax Tree Generator</i> on your own computer, <a href="https://github.com/abitcreative/syntree-svg/archive/refs/heads/gh-pages.zip">download this zip-file</a>.<br>
+	<br>
+	<font size="-1">(C) 2011 by <a href="http://mshang.ca/">Miles Shang</a>, see <a href="LICENSE.txt">license</a>.<br>
+	Adapted for SVG by <a href="https://github.com/abitcreative">Patrick Clicqu&eacute;-G&ouml;bel</a>, 2023<br> 
+	(in collaboration with <a href="http://au.dk/en/sten.vikner@cc">Sten Vikner</a> & <a href="http://au.dk/en/krc@cc">Ken Ramsh&oslash;j Christensen</a>)</font>
 	</div>
 
 
@@ -160,9 +184,9 @@ return false;
 $(function() {
 	// UI
 	$("#make-link, #color-check, #term-lines").button();
-	$("#font-size-slider").slider({value: 12, min: 8, max: 16, step: 1});
-	$("#vert-space-slider").slider({value: 35, min: 35, max: 70, step: 5});
-	$("#hor-space-slider").slider({value: 10, min: 10, max: 50, step: 5});
+	$("#font-size-slider").slider({value: 14, min: 8, max: 16, step: 1});
+	$("#vert-space-slider").slider({value: 50, min: 35, max: 70, step: 5});
+	$("#hor-space-slider").slider({value: 30, min: 10, max: 50, step: 5});
 	$("#font-style-radio, #term-font-check, #nonterm-font-check").buttonset();
 	$("#accordion").accordion({collapsible: true, icons: false, autoHeight: false});
 	
