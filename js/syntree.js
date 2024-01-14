@@ -1,6 +1,8 @@
 ﻿// By Miles Shang <mail@mshang.ca>
 // MIT license
 
+var lowest = 0;
+
 var debug = true;
 var margin = 15; // Number of pixels from tree to edge on each side.
 var padding_above_text = 6; // Lines will end this many pixels above text.
@@ -14,8 +16,7 @@ function Node() {
 	this.tail = null; // Tail of movement.
 	this.max_y = null; // Distance of the descendent of this node that is farthest from root.
 	this.children = new Array();
-	this.has_children;
-	this.first = null;
+	this.has_children; this.first = null;
 	this.last = null;
 	this.parent = null;
 	this.next = null;
@@ -112,6 +113,8 @@ Node.prototype.assign_location = function(x, y, font_size, term_lines) {
 	} else {
 		if ((this.parent) && (!term_lines) && (this.parent.children.length == 1) && (!this.draw_triangle))
 			this.y = this.parent.y + padding_above_text + padding_below_text + font_size;
+        if (term_lines && lowest !== 0)
+            this.y = lowest;
 	}
 }
 
@@ -322,9 +325,12 @@ function go(str, font_size, term_font, nonterm_font, vert_space, hor_space, colo
 	}
 
 	// Find out dimensions of the tree.
+    lowest = 0;
 	root.set_width(ctx, vert_space, hor_space, term_font, nonterm_font);
 	root.assign_location(0, 0, font_size, term_lines);
 	root.find_height();
+    lowest = root.max_y;
+	root.assign_location(0, 0, font_size, term_lines);
 	var output = $("#out");
 	
 	var movement_lines = new Array();
